@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Digital Clock</title>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-900">
+    <div class="absolute top-2/5 flex items-center justify-center">
+        <p id="time" class="text-5xl font-bold text-lime-400 bg-black rounded-lg shadow-lg px-8 py-6 flex items-center space-x-4">
+            <span id="hour"></span>
+            <span>:</span>
+            <span id="minute"></span>
+            <span>:</span>
+            <span id="second"></span>
+            <span id="ampm" class="text-2xl text-gray-400 ml-2"></span>
+        </p>
+    </div>
+
+    <script>
+        function updateClock() {
+            let date = new Date();
+            let hour = date.getHours();
+            let minute = date.getMinutes();
+            let second = date.getSeconds();
+            let ampm = hour >= 12 ? "PM" : "AM";
+
+            hour = hour % 12 || 12;
+
+            document.querySelector("#hour").innerText = hour.toString().padStart(2, "0");
+            document.querySelector("#minute").innerText = minute.toString().padStart(2, "0");
+            document.querySelector("#second").innerText = second.toString().padStart(2, "0");
+            document.querySelector("#ampm").innerText = ampm;
+
+            setTimeout(updateClock, 1000);
+        }
+
+        updateClock();
+    </script>
+</body>
+</html>
